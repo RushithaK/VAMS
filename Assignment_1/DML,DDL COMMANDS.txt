@@ -1,0 +1,1094 @@
+SQL> create table admin(aid number(10),aname varchar2(20),apassword varchar2(20));
+
+Table created.
+
+SQL> desc admin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ AID                                                NUMBER(10)
+ ANAME                                              VARCHAR2(20)
+ APASSWORD                                          VARCHAR2(20)
+
+SQL> create table user(sid number(5),sname varchar2(20),spassword varchar2(20),sregno number(6),fname varchar2(10),lname varchar2(10));
+create table user(sid number(5),sname varchar2(20),spassword varchar2(20),sregno number(6),fname varchar2(10),lname varchar2(10))
+             *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> create table user_details(sid number(5),sname varchar2(20),spassword varchar2(20),sregno number(6),fname varchar2(10),lname varchar2(10));
+
+Table created.
+
+SQL> create table course_info(cid number(10),cname varchar2(10));
+
+Table created.
+
+SQL> create table questions(qid number(10),qname varchar2(100),answer varchar2(20),opt1 varchar2(5),opt2 varchar2(5),opt3 varchar2(5),opt4 varchar2(5));
+
+Table created.
+
+SQL> create table admin(cid number(10),qname varchar2(100),crct_opt varchar2(5));
+create table admin(cid number(10),qname varchar2(100),crct_opt varchar2(5))
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> create table answers(cid number(10),qname varchar2(100),crct_opt varchar2(5));
+
+Table created.
+
+SQL> create table performance(marks number(5),cid number(10),sid number(5));
+
+Table created.
+
+SQL> create table attendance(sid number(5),has_attended varchar2(5),avg_att float(5));
+
+Table created.
+
+SQL> desc user_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(5)
+ SNAME                                              VARCHAR2(20)
+ SPASSWORD                                          VARCHAR2(20)
+ SREGNO                                             NUMBER(6)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+
+SQL> desc courses_info;
+ERROR:
+ORA-04043: object courses_info does not exist 
+
+
+SQL> desc course_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                NUMBER(10)
+ CNAME                                              VARCHAR2(10)
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                                NUMBER(10)
+ QNAME                                              VARCHAR2(100)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+
+SQL> desc answers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                NUMBER(10)
+ QNAME                                              VARCHAR2(100)
+ CRCT_OPT                                           VARCHAR2(5)
+
+SQL> desc performance;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MARKS                                              NUMBER(5)
+ CID                                                NUMBER(10)
+ SID                                                NUMBER(5)
+
+SQL> desc attendance;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(5)
+ HAS_ATTENDED                                       VARCHAR2(5)
+ AVG_ATT                                            FLOAT(5)
+
+SQL> clear screen;
+SQL> insert into course_info values('&cid','&cname');
+Enter value for cid: VCESUB015
+Enter value for cname: DBMS_IVSEM_IT_B
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB015','DBMS_IVSEM_IT_B')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB010
+Enter value for cname: DS_IIISEM_CSE_A
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB010','DS_IIISEM_CSE_A')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB023
+Enter value for cname: AIML_VISEM_IT_CSE
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB023','AIML_VISEM_IT_CSE')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB055
+Enter value for cname: OE_ECE_MATLAB_IVSEM
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB055','OE_ECE_MATLAB_IVSEM')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB002
+Enter value for cname: SPOD_ISEM_CSE_ECE_CIVIL
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB002','SPOD_ISEM_CSE_ECE_CIVIL')
+
+1 row created.
+
+SQL> select * from course_info
+  2  ;
+
+CID                  CNAME                                                      
+-------------------- ------------------------------                             
+VCESUB015            DBMS_IVSEM_IT_B                                            
+VCESUB010            DS_IIISEM_CSE_A                                            
+VCESUB023            AIML_VISEM_IT_CSE                                          
+VCESUB055            OE_ECE_MATLAB_IVSEM                                        
+VCESUB002            SPOD_ISEM_CSE_ECE_CIVIL                                    
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                                NUMBER(10)
+ QNAME                                              VARCHAR2(100)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+
+SQL> alter table questions add(cid VARCHAR(20));
+
+Table altered.
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                                NUMBER(10)
+ QNAME                                              VARCHAR2(100)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> insert into course_info values('&cid','&cname');
+Enter value for cid: VCESUB030
+Enter value for cname: APTITUDE_IVSEM_IT
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB030','APTITUDE_IVSEM_IT')
+
+1 row created.
+
+SQL> insert into course_info values('&cid','&cname');
+Enter value for cid: VCESUB005
+Enter value for cname: PPS_ISEM_CSE_IT
+old   1: insert into course_info values('&cid','&cname')
+new   1: insert into course_info values('VCESUB005','PPS_ISEM_CSE_IT')
+
+1 row created.
+
+SQL> alter table questions modify(qid VARCHAR(20));
+
+Table altered.
+
+SQL> insert into questions('Ap1','what 3% of 5% is?','30','60%','30%','15%','45%','APPTITUDE_IVSEM_IT'));
+insert into questions('Ap1','what 3% of 5% is?','30','60%','30%','15%','45%','APPTITUDE_IVSEM_IT'))
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into questions VALUES('Ap1','what 3% of 5% is?','30','60%','30%','15%','45%','APPTITUDE_IVSEM_IT'));
+insert into questions VALUES('Ap1','what 3% of 5% is?','30','60%','30%','15%','45%','APPTITUDE_IVSEM_IT'))
+                                                                                                         *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> insert into questions VALUES('Ap1','what 3% of 5% is?','30','60%','30%','15%','45%','APPTITUDE_IVSEM_IT');
+
+1 row created.
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'));
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'));
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'));
+insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'))
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'));
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'));
+insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','APPTITUDE_IVSEM_IT'))
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') VALUES(('AP2','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','2','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT'),('AP3','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','APPTITUDE_IVSEM_IT'),('AP4','The average age of a group of 5 students was 10.The \naverage age increased by 4 years when 2 new \nstudents joined the group.What is the average age of \nthe two new students who joined the group?','24','15','20','22','24','APPTITUDE_IVSEM_IT'),('AP5','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','APPTITUDE_IVSEM_IT'),('AP6','3 is 80% of what number?','3.75','2.50','3.00','3.75','3.50','APPTITUDE_IVSEM_IT'),('AP7','In an equation, (96)^(1/2) ö (k)^(1/2) = 2*(6)^(1/2);\nwhat value of k will satisfy the equation?','4','2','4','6','8','APPTITUDE_IVSEM_IT'),('AP8','To the correct number of significant figures, \n(5.0 x 10^-5) ö (2.00 x 10^-2) is?','2.5X10^-3','2.5X10^-7','2.5X10^-3','2.50X10^-3','None of the above','APPTITUDE_IVSEM_IT'),('AP9','The product of 3x2 matrix and 2x3 matrix will result \nin what order matrix?','3x3','3x2','2x2','2x3','3x3','AP
+  2  
+SQL> insert into questions('AP2','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT');
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT');
+insert into questions('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT')
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into questions values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT');
+insert into questions values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','APPTITUDE_IVSEM_IT')
+                                                                 *
+ERROR at line 1:
+ORA-00917: missing comma 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030');
+insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030')
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into 'questions'('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030');
+insert into 'questions'('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030');
+insert into questions('qid','qname','answer','opt1','opt2','opt3','opt4','cid') values('AP2','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None of the above','VCESUB030')
+                      *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?
+Enter value for answer: 5040
+Enter value for opt1: 49
+Enter value for opt2: 5040
+Enter value for opt3: 7670
+Enter value for opt4: None
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?
+Enter value for answer: 5040
+Enter value for opt1: 49
+Enter value for opt2: 5040
+Enter value for opt3: 7670
+Enter value for opt4: None
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','In how many ways the letter `SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?
+Enter value for answer: 5040
+Enter value for opt1: 49
+Enter value for opt2: 5040
+Enter value for opt3: 7670
+Enter value for opt4: None
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+                                                                  *
+ERROR at line 1:
+ORA-00917: missing comma 
+
+
+SQL> desc questions
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                                VARCHAR2(20)
+ QNAME                                              VARCHAR2(100)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?
+Enter value for answer: 5040
+Enter value for opt1: 49
+Enter value for opt2: 5040
+Enter value for opt3: 7670
+Enter value for opt4: None
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+                                                                  *
+ERROR at line 1:
+ORA-00917: missing comma 
+
+
+SQL> alter table questions modify(qname varchar2(200));
+
+Table altered.
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?
+Enter value for answer: 5040
+Enter value for opt1: 49
+Enter value for opt2: 5040
+Enter value for opt3: 7670
+Enter value for opt4: None
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+insert into questions values('Apt1','In how many ways the letter 'SOLVING' can be\nrearranged to make 7 letter words such that none\nof the letters repeat?','5040','49','5040','7670','None','VCESUB030')
+                                                                  *
+ERROR at line 1:
+ORA-00917: missing comma 
+
+
+SQL> desc questions
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                                VARCHAR2(20)
+ QNAME                                              VARCHAR2(200)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid');
+Enter value for qid: Apt1
+Enter value for qname: What is the missing letter in this series?\n  b e h k n ? t
+Enter value for answer: r
+Enter value for opt1: q
+Enter value for opt2: r
+Enter value for opt3: s
+Enter value for opt4: u
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt1','What is the missing letter in this series?\n  b e h k n ? t','r','q','r','s','u','VCESUB030')
+
+1 row created.
+
+SQL> /
+Enter value for qid: Apt3
+Enter value for qname: 3 is 80% of what number?
+Enter value for answer: 3.75
+Enter value for opt1: 2.00
+Enter value for opt2: 3.00
+Enter value for opt3: 3.75
+Enter value for opt4: 4.75
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt3','3 is 80% of what number?','3.75','2.00','3.00','3.75','4.75','VCESUB030')
+
+1 row created.
+
+SQL> /
+Enter value for qid: Apt4
+Enter value for qname: If you unscramble the letters YKANE, you will get the \nname of a:
+Enter value for answer: Country
+Enter value for opt1: Mountain Pass
+Enter value for opt2: Warrior
+Enter value for opt3: Flower
+Enter value for opt4: Country
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt4','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','VCESUB030')
+insert into questions values('Apt4','If you unscramble the letters YKANE, you will get the \nname of a:','Country','Mountain Pass','Warrior','Flower','Country','VCESUB030')
+                                                                                                                   *
+ERROR at line 1:
+ORA-12899: value too large for column "RUSHDB"."QUESTIONS"."OPT1" (actual: 13, 
+maximum: 5) 
+
+
+SQL> /
+Enter value for qid: Apt4
+Enter value for qname: If you unscramble the letters YKANE, you will get the \nname of a:
+Enter value for answer: Count
+Enter value for opt1: Mount
+Enter value for opt2: Warr
+Enter value for opt3: Flow
+Enter value for opt4: Count
+Enter value for cid: VCESUB030
+old   1: insert into questions values('&qid','&qname','&answer','&opt1','&opt2','&opt3','&opt4','&cid')
+new   1: insert into questions values('Apt4','If you unscramble the letters YKANE, you will get the \nname of a:','Count','Mount','Warr','Flow','Count','VCESUB030')
+
+1 row created.
+
+SQL> select * from questions;
+
+QID                                                                             
+--------------------                                                            
+QNAME                                                                           
+--------------------------------------------------------------------------------
+ANSWER               OPT1  OPT2  OPT3  OPT4  CID                                
+-------------------- ----- ----- ----- ----- --------------------               
+Ap1                                                                             
+what 3% of 5% is?                                                               
+30                   60%   30%   15%   45%   APPTITUDE_IVSEM_IT                 
+                                                                                
+Apt1                                                                            
+What is the missing letter in this series?\n  b e h k n ? t                     
+r                    q     r     s     u     VCESUB030                          
+
+QID                                                                             
+--------------------                                                            
+QNAME                                                                           
+--------------------------------------------------------------------------------
+ANSWER               OPT1  OPT2  OPT3  OPT4  CID                                
+-------------------- ----- ----- ----- ----- --------------------               
+                                                                                
+Apt3                                                                            
+3 is 80% of what number?                                                        
+3.75                 2.00  3.00  3.75  4.75  VCESUB030                          
+                                                                                
+Apt4                                                                            
+If you unscramble the letters YKANE, you will get the \nname of a:              
+
+QID                                                                             
+--------------------                                                            
+QNAME                                                                           
+--------------------------------------------------------------------------------
+ANSWER               OPT1  OPT2  OPT3  OPT4  CID                                
+-------------------- ----- ----- ----- ----- --------------------               
+Count                Mount Warr  Flow  Count VCESUB030                          
+                                                                                
+
+SQL> desc answers
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                NUMBER(10)
+ QNAME                                              VARCHAR2(100)
+ CRCT_OPT                                           VARCHAR2(5)
+
+SQL> delete from answers column qname;
+delete from answers column qname
+                    *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table answers drop column qname;
+
+Table altered.
+
+SQL> desc answers
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                NUMBER(10)
+ CRCT_OPT                                           VARCHAR2(5)
+
+SQL> alter table answers add(qid VARCHAR2(20));
+
+Table altered.
+
+SQL> insert into table values('&cid','&crct_opt',)
+  2  ;
+Enter value for cid: 
+Enter value for crct_opt: 
+old   1: insert into table values('&cid','&crct_opt',)
+new   1: insert into table values('','',)
+insert into table values('','',)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> alter table answers modify(cid VARCHAR(20));
+
+Table altered.
+
+SQL> insert into table values('&cid','&crct_opt','&qid');
+Enter value for cid: None
+Enter value for crct_opt: 
+Enter value for qid: 
+old   1: insert into table values('&cid','&crct_opt','&qid')
+new   1: insert into table values('None','','')
+insert into table values('None','','')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> insert into table values('&cid','&crct_opt','&qid');
+Enter value for cid: VCESUB030
+Enter value for crct_opt: 30%
+Enter value for qid: Apt1
+old   1: insert into table values('&cid','&crct_opt','&qid')
+new   1: insert into table values('VCESUB030','30%','Apt1')
+insert into table values('VCESUB030','30%','Apt1')
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> insert into answers values('&cid','&crct_opt','&qid');
+Enter value for cid: VCESUB030
+Enter value for crct_opt: 30%
+Enter value for qid: Apt1
+old   1: insert into answers values('&cid','&crct_opt','&qid')
+new   1: insert into answers values('VCESUB030','30%','Apt1')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB030
+Enter value for crct_opt: r
+Enter value for qid: Apt2
+old   1: insert into answers values('&cid','&crct_opt','&qid')
+new   1: insert into answers values('VCESUB030','r','Apt2')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB030
+Enter value for crct_opt: Count
+Enter value for qid: Apt3
+old   1: insert into answers values('&cid','&crct_opt','&qid')
+new   1: insert into answers values('VCESUB030','Count','Apt3')
+
+1 row created.
+
+SQL> /
+Enter value for cid: VCESUB030
+Enter value for crct_opt: 3.75
+Enter value for qid: Apt4
+old   1: insert into answers values('&cid','&crct_opt','&qid')
+new   1: insert into answers values('VCESUB030','3.75','Apt4')
+
+1 row created.
+
+SQL> select * from answers;
+
+CID                  CRCT_ QID                                                  
+-------------------- ----- --------------------                                 
+VCESUB030            30%   Apt1                                                 
+VCESUB030            r     Apt2                                                 
+VCESUB030            Count Apt3                                                 
+VCESUB030            3.75  Apt4                                                 
+
+SQL> desc attendance
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                NUMBER(5)
+ HAS_ATTENDED                                       VARCHAR2(5)
+ AVG_ATT                                            FLOAT(5)
+
+SQL> desc user_info;
+ERROR:
+ORA-04043: object user_info does not exist 
+
+
+SQL> desc user_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(20)
+ SREGNO                                             VARCHAR2(20)
+ SNAME                                              VARCHAR2(20)
+ SPASSWORD                                          VARCHAR2(10)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+
+SQL> alter table attendance modify(sid varchar2(20));
+
+Table altered.
+
+SQL> desc user_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                                VARCHAR2(20)
+ SREGNO                                             VARCHAR2(20)
+ SNAME                                              VARCHAR2(20)
+ SPASSWORD                                          VARCHAR2(10)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+
+SQL> insert into attendance values('&sid','&has_attended','&avg_att');
+Enter value for sid: it19090
+Enter value for has_attended: yes
+Enter value for avg_att: 905
+old   1: insert into attendance values('&sid','&has_attended','&avg_att')
+new   1: insert into attendance values('it19090','yes','905')
+
+1 row created.
+
+SQL> select * from user_details;
+
+SID                  SREGNO               SNAME                SPASSWORD        
+-------------------- -------------------- -------------------- ----------       
+FNAME      LNAME                                                                
+---------- ----------                                                           
+it19090              1602-19-737-090      K.Rushitha           vce@123          
+Kaleru     Rushitha                                                             
+                                                                                
+it19001              1602-19-737-001      L.Anirudh            vce@123          
+Lakiya     Anirudh                                                              
+                                                                                
+ece19076             1602-19-735-076      K.Rekha              vce@123          
+Kanduri    Rekha                                                                
+                                                                                
+
+SID                  SREGNO               SNAME                SPASSWORD        
+-------------------- -------------------- -------------------- ----------       
+FNAME      LNAME                                                                
+---------- ----------                                                           
+cse18028                                                       vce@123          
+                                                                                
+                                                                                
+cse18028             1602-18-733-028      M.Raghu              vce@123          
+Mantana    Raghu                                                                
+                                                                                
+eee17120             1602-17-736-120      N.Charvee            vce@123          
+Nanduri    Charvee                                                              
+                                                                                
+
+6 rows selected.
+
+SQL> insert into attendance values('&sid','&has_attended','&avg_att');
+Enter value for sid: eee17120
+Enter value for has_attended: no
+Enter value for avg_att: 76%
+old   1: insert into attendance values('&sid','&has_attended','&avg_att')
+new   1: insert into attendance values('eee17120','no','76%')
+insert into attendance values('eee17120','no','76%')
+                                              *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> insert into attendance values('&sid','&has_attended','&avg_att');
+Enter value for sid: eee17120
+Enter value for has_attended: no
+Enter value for avg_att: 76
+old   1: insert into attendance values('&sid','&has_attended','&avg_att')
+new   1: insert into attendance values('eee17120','no','76')
+
+1 row created.
+
+SQL> select * from attedance;
+select * from attedance
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from attendance;
+
+SID                  HAS_A    AVG_ATT                                           
+-------------------- ----- ----------                                           
+it19090              yes          910                                           
+eee17120             no            76                                           
+
+SQL> desc performance;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MARKS                                              NUMBER(5)
+ CID                                                NUMBER(10)
+ SID                                                NUMBER(5)
+
+SQL> alter table performance modify(cid varchar2(20),sid varchar2(20));
+
+Table altered.
+
+SQL> desc performance;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MARKS                                              NUMBER(5)
+ CID                                                VARCHAR2(20)
+ SID                                                VARCHAR2(20)
+
+SQL> insert into students values('marks','&cid','&sid');
+Enter value for cid: 
+Enter value for sid: 
+old   1: insert into students values('marks','&cid','&sid')
+new   1: insert into students values('marks','','')
+insert into students values('marks','','')
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> insert into students values('&marks','&cid','&sid');
+Enter value for marks: 40
+Enter value for cid: VCESUB030
+Enter value for sid: eee17120
+old   1: insert into students values('&marks','&cid','&sid')
+new   1: insert into students values('40','VCESUB030','eee17120')
+insert into students values('40','VCESUB030','eee17120')
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> insert into attendance values('&marks','&cid','&sid');
+Enter value for marks: 40
+Enter value for cid: VCESUB030
+Enter value for sid: eee17120
+old   1: insert into attendance values('&marks','&cid','&sid')
+new   1: insert into attendance values('40','VCESUB030','eee17120')
+insert into attendance values('40','VCESUB030','eee17120')
+                                   *
+ERROR at line 1:
+ORA-12899: value too large for column "RUSHDB"."ATTENDANCE"."HAS_ATTENDED" 
+(actual: 9, maximum: 5) 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> desc performance;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MARKS                                              NUMBER(5)
+ CID                                                VARCHAR2(20)
+ SID                                                VARCHAR2(20)
+
+SQL> insert into performance values('marks','&cid','&sid');
+Enter value for cid: 
+Enter value for sid: 
+old   1: insert into performance values('marks','&cid','&sid')
+new   1: insert into performance values('marks','','')
+insert into performance values('marks','','')
+                               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> insert into performance values('&marks','&cid','&sid');
+Enter value for marks: 40
+Enter value for cid: VCESUB030
+Enter value for sid: eee17120
+old   1: insert into performance values('&marks','&cid','&sid')
+new   1: insert into performance values('40','VCESUB030','eee17120')
+
+1 row created.
+
+SQL> /
+Enter value for marks: 45
+Enter value for cid: VCESUB030
+Enter value for sid: it19090
+old   1: insert into performance values('&marks','&cid','&sid')
+new   1: insert into performance values('45','VCESUB030','it19090')
+
+1 row created.
+
+SQL> /
+Enter value for marks: 29
+Enter value for cid: VCESUB030
+Enter value for sid: it19001
+old   1: insert into performance values('&marks','&cid','&sid')
+new   1: insert into performance values('29','VCESUB030','it19001')
+
+1 row created.
+
+SQL> select * from performance;
+
+     MARKS CID                  SID                                             
+---------- -------------------- --------------------                            
+        40 VCESUB030            eee17120                                        
+        45 VCESUB030            it19090                                         
+        29 VCESUB030            it19001                                         
+
+SQL> alter table admin add PRIMARy key(aid);
+
+Table altered.
+
+SQL> desc admin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ AID                                       NOT NULL NUMBER(10)
+ ANAME                                              VARCHAR2(20)
+ APASSWORD                                          VARCHAR2(20)
+
+SQL> alter table user _details add primary key(sid);
+alter table user _details add primary key(sid)
+            *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> alter table user_details add primary key(sid);
+alter table user_details add primary key(sid)
+*
+ERROR at line 1:
+ORA-02437: cannot validate (RUSHDB.SYS_C007167) - primary key violated 
+
+
+SQL> select * from user_deatails;
+select * from user_deatails
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from user_details;
+
+SID                  SREGNO               SNAME                SPASSWORD        
+-------------------- -------------------- -------------------- ----------       
+FNAME      LNAME                                                                
+---------- ----------                                                           
+it19090              1602-19-737-090      K.Rushitha           vce@123          
+Kaleru     Rushitha                                                             
+                                                                                
+it19001              1602-19-737-001      L.Anirudh            vce@123          
+Lakiya     Anirudh                                                              
+                                                                                
+ece19076             1602-19-735-076      K.Rekha              vce@123          
+Kanduri    Rekha                                                                
+                                                                                
+
+SID                  SREGNO               SNAME                SPASSWORD        
+-------------------- -------------------- -------------------- ----------       
+FNAME      LNAME                                                                
+---------- ----------                                                           
+cse18028                                                       vce@123          
+                                                                                
+                                                                                
+cse18028             1602-18-733-028      M.Raghu              vce@123          
+Mantana    Raghu                                                                
+                                                                                
+eee17120             1602-17-736-120      N.Charvee            vce@123          
+Nanduri    Charvee                                                              
+                                                                                
+
+6 rows selected.
+
+SQL> delete from user_details where sid='cse18028';
+
+2 rows deleted.
+
+SQL> alter table user_details add primary key(sid);
+
+Table altered.
+
+SQL> desc user_details;;
+SP2-0565: Illegal identifier.
+SQL> desc user_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL VARCHAR2(20)
+ SREGNO                                             VARCHAR2(20)
+ SNAME                                              VARCHAR2(20)
+ SPASSWORD                                          VARCHAR2(10)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+
+SQL> alter table course_info add primary key(cid);
+
+Table altered.
+
+SQL> desc course_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(20)
+ CNAME                                              VARCHAR2(30)
+
+SQL> alter table questions add primary key(cqd);
+alter table questions add primary key(cqd)
+                                      *
+ERROR at line 1:
+ORA-00904: "CQD": invalid identifier 
+
+
+SQL> alter table questions add primary key(qid);
+
+Table altered.
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                       NOT NULL VARCHAR2(20)
+ QNAME                                              VARCHAR2(200)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> ALTER TABLE students ADD CONSTRAINT un_sid_con UNIQUE(sid,contact);
+ALTER TABLE students ADD CONSTRAINT un_sid_con UNIQUE(sid,contact)
+                                                          *
+ERROR at line 1:
+ORA-00904: "CONTACT": invalid identifier 
+
+
+SQL> ALTER TABLE admin ADD CONSTRAINT un_sid_con UNIQUE(aid);
+ALTER TABLE admin ADD CONSTRAINT un_sid_con UNIQUE(aid)
+                                            *
+ERROR at line 1:
+ORA-02261: such unique or primary key already exists in the table 
+
+
+SQL> ALTER TABLE questions ADD CONSTRAINT un_ques_answer UNIQUE(qname,answer);
+
+Table altered.
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                       NOT NULL VARCHAR2(20)
+ QNAME                                              VARCHAR2(200)
+ ANSWER                                             VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> ALTER TABLE course ADD CONSTRAINT un_cname UNIQUE(cname);
+ALTER TABLE course ADD CONSTRAINT un_cname UNIQUE(cname)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ALTER TABLE course_info ADD CONSTRAINT un_cname UNIQUE(cname);
+
+Table altered.
+
+SQL> ALTER TABLE user_details ADD CONSTRAINT un_regno UNIQUE(sregno);
+
+Table altered.
+
+SQL> ALTER TABLE admin MODIFY (aname varchar2(20) CONSTRAINT nn_an NOT NULL);
+
+Table altered.
+
+SQL> ALTER TABLE user_details MODIFY (sname varchar2(20) CONSTRAINT nn_sn NOT NULL,sregno varchar2(20) CONSTRAINT nn_sr NOT NULL);
+
+Table altered.
+
+SQL> desc admin;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ AID                                       NOT NULL NUMBER(10)
+ ANAME                                     NOT NULL VARCHAR2(20)
+ APASSWORD                                          VARCHAR2(20)
+
+SQL> desc user_details;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ SID                                       NOT NULL VARCHAR2(20)
+ SREGNO                                    NOT NULL VARCHAR2(20)
+ SNAME                                     NOT NULL VARCHAR2(20)
+ SPASSWORD                                          VARCHAR2(10)
+ FNAME                                              VARCHAR2(10)
+ LNAME                                              VARCHAR2(10)
+
+SQL> ALTER TABLE questions MODIFY (qname varchar2(200) CONSTRAINT nn_qn NOT NULL,answer varchar2(20) CONSTRAINT nn_ar NOT NULL);
+
+Table altered.
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                       NOT NULL VARCHAR2(20)
+ QNAME                                     NOT NULL VARCHAR2(200)
+ ANSWER                                    NOT NULL VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> alter table questions add foreign key(cid) references course_info;
+alter table questions add foreign key(cid) references course_info
+*
+ERROR at line 1:
+ORA-02298: cannot validate (RUSHDB.SYS_C007179) - parent keys not found 
+
+
+SQL> desc course_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL VARCHAR2(20)
+ CNAME                                              VARCHAR2(30)
+
+SQL> ALTER TABLE questions ADD CONTRAINT fk_cid  FOREIGN KEY(cid) REFERENCES course_info ON DELETE CASCADE
+  2  ;
+ALTER TABLE questions ADD CONTRAINT fk_cid  FOREIGN KEY(cid) REFERENCES course_info ON DELETE CASCADE
+                                            *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table answers add foreign key(cid) references course_info;
+
+Table altered.
+
+SQL> desc answers;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                                VARCHAR2(20)
+ CRCT_OPT                                           VARCHAR2(5)
+ QID                                                VARCHAR2(20)
+
+SQL> alter table answers add foreign key(qid) references questions;
+alter table answers add foreign key(qid) references questions
+*
+ERROR at line 1:
+ORA-02298: cannot validate (RUSHDB.SYS_C007181) - parent keys not found 
+
+
+SQL> desc questions;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ QID                                       NOT NULL VARCHAR2(20)
+ QNAME                                     NOT NULL VARCHAR2(200)
+ ANSWER                                    NOT NULL VARCHAR2(20)
+ OPT1                                               VARCHAR2(5)
+ OPT2                                               VARCHAR2(5)
+ OPT3                                               VARCHAR2(5)
+ OPT4                                               VARCHAR2(5)
+ CID                                                VARCHAR2(20)
+
+SQL> spool off
+
